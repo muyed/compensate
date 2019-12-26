@@ -1,0 +1,55 @@
+server:
+  port: 7003
+  compression:
+          enabled: true
+          mime-types:
+            -
+              application-json
+            -
+              application/xml
+            -
+              application/javascript
+            -
+              text/html
+            -
+              text/xml
+            -
+              text/plain
+            -
+              text/css
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://snt-daily-pub.mysql.rds.aliyuncs.com/snt_compensate?useUnicode=true&characterEncoding=UTF8
+    username: sntuic
+    password: 1qaz!QAZ
+
+dubbo:
+  application:
+    name: snt-compensate-provider
+    qos-enable: false
+  registry:
+    address: zookeeper://47.99.215.186:2181
+  protocol:
+    name: dubbo
+    port: 20882
+  scan:
+    basePackages: com.muye.compensate.service.api
+  provider:
+    #filter: provider-session
+    version: 1.0.0-dev
+  consumer:
+    #filter: consumer-session
+    version: 1.0.0-dev
+    check: false
+
+xdiamond:
+  client:
+    groupid: com.songshu.compensate
+    artifactid: snt-compensate
+    version: 1.0.0
+    profile: dev
+    secretkey:
+  server:
+    host: 47.98.39.144
+    port: 5678
